@@ -1,0 +1,115 @@
+ * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* --- 2. Navigation Bar Styles --- */
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* --- 3. Form Container Styles --- */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh; /* Centers form vertically */
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px; /* Prevents form from getting too wide */
+        }
+
+        .form-container h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* --- 4. Input Styles --- */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Input Focus Effect */
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        /* --- 5. Button Styles --- */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
