@@ -1,9 +1,9 @@
 {
   "name": "day6",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,6 +13,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.2.1",
+    "mysql2": "^3.16.0",
     "nodemon": "^3.1.11",
     "sequelize": "^6.37.7"
   }
