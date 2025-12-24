@@ -1,6 +1,6 @@
 const {Sequelize,DataTypes} = require('sequelize')
 const databaseConfig = require('../config/dbConfig')
-// const makeBlogTable = require('./blogModel')
+const makeBlogTable = require('./blogModel')
 const makeUserTable = require('./userModel')
 
 
@@ -33,6 +33,7 @@ db.sequelize = sequelize
 
 // db.blogs = makeBlogTable(sequelize,DataTypes)
 db.users = require("./userModel.js")(sequelize,DataTypes);
+db.blogs = require("./blogModel.js")(sequelize,DataTypes);
 
 db.sequelize.sync({force : false}).then(()=>{
     console.log("Synced done!!")
