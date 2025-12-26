@@ -6,6 +6,8 @@ exports.renderAskquestionPage = (req,res)=>{
 
 exports.askquestion =async(req,res)=>{
     const {title,description}=req.body
+    console.log(req.body)
+    console.log(req.file)
     const userID = req.userID
     const fileName = req.file.filename
     if (!title || ! description){
