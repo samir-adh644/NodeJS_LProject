@@ -2,8 +2,7 @@ const express = require('express');
 const { users } = require('./model/index');
 const app = express();
 const PORT = 3000;
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const { renderHomePage, renderRegisterPage, handleRegisterPage, renderLoginPage, handleLoginPage }=require('./controller/authController')
 
 require("./model/index")
 
@@ -12,36 +11,11 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 
-app.get('/',(req,res)=>{
-    res.send("This is home page")
-})
+app.get('/',renderHomePage )
 
-app.get('/register',(req,res)=>{
-    res.render("auth/register")
-})
+app.get('/register',renderRegisterPage)
 
-app.post('/register',async(req,res)=>{
-    const {username ,email ,password}=req.body
-    if(!username || !email || !password ){
-        return res.send("Pleaseprovide username,email and password")
-    }
-
-    const data = await users.findAll({
-        where: {
-            email:email
-        }
-    })
-    if(data.length>0){
-        return res.send("Already registered email")
-    }
-
-   await users.create({
-        email:email,
-        password:bcrypt.hashSync(password,5),
-        username:username
-    })
-    res.send("Registered Successfullly!")
-})
+app.post('/register',handleRegisterPage)
 
 
 app.get("/users",async(req,res)=>{
@@ -51,44 +25,9 @@ app.get("/users",async(req,res)=>{
     })
 })
 
-app.get('/login',(req,res)=>{
-     res.render("auth/login")
-})
+app.get('/login',renderLoginPage)
 
-app.post('/login',async(req,res)=>{
-    const {email ,password}=req.body
-    if(!email || !password ){
-        return res.send("Please provide email and password")
-    }
-
-    const [data] = await users.findAll({
-        where:{
-            email:email
-        }
-    })
-
-    if(data){
-        const isMatched = bcrypt.compareSync(password,data.password)
-        if (isMatched){
-           const token  =  jwt.sign({id : data.id},'hahaha',{
-                expiresIn : '30d'
-             }        )
-
-             res.cookie('jwtToken',token)
-          
-             res.send("Logged In successfully")
-        }
-        else{
-             return res.send("Email or password incorrect")
-        }
-    }
-    else{
-        return res.send("Email or password incorrect")
-    }
-
-   
-  
-})
+app.post('/login',handleLoginPage)
 
 
 app.use(express.static('public/css/'));
