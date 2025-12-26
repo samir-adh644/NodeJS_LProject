@@ -3,6 +3,7 @@ const { users } = require('./model/index');
 const app = express();
 const PORT = 3000;
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 require("./model/index")
 
@@ -69,7 +70,13 @@ app.post('/login',async(req,res)=>{
     if(data){
         const isMatched = bcrypt.compareSync(password,data.password)
         if (isMatched){
-            return res.send("Logged In successfully")
+           const token  =  jwt.sign({id : data.id},'hahaha',{
+                expiresIn : '30d'
+             }        )
+
+             res.cookie('jwtToken',token)
+          
+             res.send("Logged In successfully")
         }
         else{
              return res.send("Email or password incorrect")
