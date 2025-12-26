@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/log_reg.css">
+    <title>Asking</title>
+
+</head>
+<body>
+
+    <%- include('../components/navbar') %>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Ask Questions</h2>
+            
+            <form action="/register" method="POST">
+                
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the Title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">Image</label>
+                    <input type="file" id="image" name="image" placeholder="Enter image" required>
+                </div>
+
+                <div class="form-group">
+                   <textarea placeholder="Description" cols="30" rows="10"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Ask Question</button>
+                
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

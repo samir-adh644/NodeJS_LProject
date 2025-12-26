@@ -3,7 +3,9 @@ const { users } = require('./model/index');
 const app = express();
 const PORT = 3000;
 const { renderHomePage, renderRegisterPage, handleRegisterPage, renderLoginPage, handleLoginPage }=require('./controller/authController')
-const authRoute = require('./routes/authRoutes')
+const authRoute = require('./routes/authRoutes');
+const questRoute = require('./routes/questionRoutes')
+
 require("./model/index")
 
 app.set('view engine','ejs')
@@ -15,6 +17,8 @@ app.use(express.json())
 app.get('/',renderHomePage )
 
 app.use('/',authRoute)
+
+app.use('/',questRoute)
 
 
 

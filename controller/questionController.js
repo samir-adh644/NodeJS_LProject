@@ -1,0 +1,32 @@
+const { questions } = require("../model")
+
+exports.renderAskquestionPage = (req,res)=>{
+    res.render("questions/askQuestion")
+}
+
+exports.askquestion =async(req,res)=>{
+    const {title,description}=req.body
+    const userID = req.userID
+    const fileName = req.file.filename
+    if (!title || ! description){
+        return res.send("Please provide title , description")
+    }
+
+    await questions.create({
+        title,
+        description,
+        image :fileName,
+        userID
+    })
+    res.redirect('/')
+}
+
+exports.getAllquestion = async(req,res)=>{
+    const data = await questions.findAll({
+        include :[
+            {
+                model:users
+            }
+        ]
+    })
+}
