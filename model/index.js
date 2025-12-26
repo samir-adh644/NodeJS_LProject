@@ -34,6 +34,20 @@ db.sequelize = sequelize
 // db.blogs = makeBlogTable(sequelize,DataTypes)
 db.users = require("./userModel.js")(sequelize,DataTypes);
 db.blogs = require("./blogModel.js")(sequelize,DataTypes);
+db.questions = require("./questionModel.js")(sequelize,DataTypes);
+db.answers = require("./answerModel.js")(sequelize,DataTypes);
+
+
+// making relationship
+db.users.hasMany(db.questions)
+db.questions.belongsTo(db.users)
+
+db.questions.hasMany(db.answers)
+db.answers.belongsTo(db.questions)
+
+db.users.hasMany(db.answers)
+db.answers.belongsTo(db.users)
+
 
 db.sequelize.sync({force : false}).then(()=>{
     console.log("Synced done!!")
