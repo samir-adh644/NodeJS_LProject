@@ -3,7 +3,7 @@ const { users } = require('./model/index');
 const app = express();
 const PORT = 3000;
 const { renderHomePage, renderRegisterPage, handleRegisterPage, renderLoginPage, handleLoginPage }=require('./controller/authController')
-
+const authRoute = require('./routes/authRoutes')
 require("./model/index")
 
 app.set('view engine','ejs')
@@ -11,23 +11,15 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 
+
 app.get('/',renderHomePage )
 
-app.get('/register',renderRegisterPage)
-
-app.post('/register',handleRegisterPage)
+app.use('/',authRoute)
 
 
-app.get("/users",async(req,res)=>{
-    const data = await users.findAll()
-    res.json({
-        data
-    })
-})
 
-app.get('/login',renderLoginPage)
 
-app.post('/login',handleLoginPage)
+
 
 
 app.use(express.static('public/css/'));
