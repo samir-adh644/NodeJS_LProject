@@ -8,7 +8,7 @@ exports.askquestion =async(req,res)=>{
     const {title,description}=req.body
     console.log(req.body)
     console.log(req.file)
-    const userID = req.userID
+    const userId = req.userId
     const fileName = req.file.filename
     if (!title || ! description){
         return res.send("Please provide title , description")
@@ -18,7 +18,7 @@ exports.askquestion =async(req,res)=>{
         title,
         description,
         image :fileName,
-        userID
+        userId
     })
     res.redirect('/')
 }
