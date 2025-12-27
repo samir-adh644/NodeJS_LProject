@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Portal</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: space-between; /* Logo left, Links right */
+            align-items: center;
+            padding: 15px 40px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        /* --- Main Content Section --- */
+        .container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Container for the cards */
+        .question-wrapper {
+            display: flex;
+            gap: 20px; 
+            width: 100%;
+        }
+
+        /* Individual Card Styling */
+        .question-card {
+            background: #ffffff;
+            border-top: 4px solid #3498db; /* Changed to top border for a header look */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex: 1; 
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .question-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Title Styling */
+        .question-title {
+            font-size: 1.25rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* Author Styling */
+        .author-info {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .author-label {
+            font-weight: bold;
+            color: #34495e;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .question-wrapper {
+                flex-direction: column;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Q-Portal</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Trending Questions</h2>
+        
+<div class="question-wrapper">
+    <% data.forEach((question) => { %>
+        <div class="question-card">
+            <div class="question-title"><%- question.title %></div>
+            
+            <div class="author-info">
+                <span class="author-label">Author</span>
+                <%- question.user.username %> 
+            </div>
+        </div>
+    <% }) %>
+</div>
+        
+          
+
+          
+
+        </div>
+    </div>
+
+</body>
+</html>

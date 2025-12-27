@@ -1,9 +1,16 @@
-const { users } = require("../model")
+const { users, questions } = require("../model")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-exports.renderHomePage = (req,res)=>{
-    res.send('This is home page')
+exports.renderHomePage = async(req,res)=>{
+    const data = await questions.findAll(
+        {
+            include : [{
+                model:users
+            }]
+        }
+    )
+    res.render('components/home',{data})
 }
 
 exports.renderRegisterPage = (req,res)=>{
