@@ -17,40 +17,7 @@
             background-color: #f0f2f5;
         }
 
-        /* --- Navigation Bar --- */
-        .navbar {
-            background-color: #2c3e50;
-            display: flex;
-            justify-content: space-between; /* Logo left, Links right */
-            align-items: center;
-            padding: 15px 40px;
-            color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
 
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #3498db;
-        }
 
         /* --- Main Content Section --- */
         .container {
@@ -132,19 +99,11 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-logo">Q-Portal</div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
+   <%- include('../components/navbar') %>
 
     <div class="container">
         <h2 class="section-title">Trending Questions</h2>

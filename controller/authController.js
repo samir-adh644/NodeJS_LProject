@@ -37,7 +37,7 @@ exports.handleRegisterPage = async(req,res)=>{
         password:bcrypt.hashSync(password,5),
         username:username
     })
-    res.send("Registered Successfullly!")
+    res.redirect('/login')
 }
 
 exports.renderLoginPage = (req,res)=>{
@@ -65,7 +65,7 @@ exports.handleLoginPage = async(req,res)=>{
 
              res.cookie('jwtToken',token)
           
-             res.send("Logged In successfully")
+             res.redirect('/')
         }
         else{
              return res.send("Email or password incorrect")

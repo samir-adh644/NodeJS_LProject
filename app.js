@@ -6,6 +6,8 @@ const PORT = 3000;
 const { renderHomePage, renderRegisterPage, handleRegisterPage, renderLoginPage, handleLoginPage }=require('./controller/authController')
 const authRoute = require('./routes/authRoutes');
 const questRoute = require('./routes/questionRoutes')
+const jwt = require('jsonwebtoken')
+const {promisify} = require("util")
 
 require("./model/index")
 
@@ -13,6 +15,26 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(async(req,res,next)=>{
+    const token = req.cookies.jwtToken
+    try {
+          const verifiedResult = await promisify(jwt.verify)(token,'hahaha')
+     if(verifiedResult)
+     {
+         res.locals.isAuthneticated = true
+     }
+     else{
+         res.locals.isAuthneticated = false
+     }
+    }
+    catch(error){
+        res.locals.isAuthneticated=false
+    }
+   
+   
+    next()
+})
 
 
 

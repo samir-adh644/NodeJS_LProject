@@ -1,9 +1,16 @@
  <nav class="navbar">
         <a href="#" class="logo">MyBrand</a>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/">Home</a></li>
+             <li><a href="#">About</a></li>
+            <% if(isAuthneticated){ %>
+                <li><a href="/login">LogOut</a></li>
+            <% } else {  %>
+                  <li><a href="/login">Login</a></li>
+                  <li><a href="/register">Register</a></li>
+            <%    }%>
+           
+          
+            
         </ul>
     </nav>
