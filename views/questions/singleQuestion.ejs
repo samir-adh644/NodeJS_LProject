@@ -99,7 +99,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="singleQuestion.css">
 </head>
 <body>
 
@@ -109,16 +109,17 @@
         <h2 class="section-title">Trending Questions</h2>
         
 <div class="question-wrapper">
-    <% data.forEach((question) => { %>
-        <div class="question-card" onclick="window.location.href=`/question/<%- question.id %>`">
-            <div class="question-title"><%- question.title %></div>
-            
-            <div class="author-info">
-                <span class="author-label">Author</span>
-                <%- question.user.username %> 
-            </div>
+    
+        <div class="question-card">
+            <div class="question-title"><%- data[0].title %></div>
+             <div class="question-description"><%- data[0].description %></div>
+            <img src = "http://localhost:3000/<%- data[0].image %>" alt="question image" scrset="">
+            <!-- <div class="author-info">
+                <span class="author-label">Author <%- data[0].username %></span>
+             
+            </div> -->
         </div>
-    <% }) %>
+ 
 </div>
         
           

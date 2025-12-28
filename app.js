@@ -51,6 +51,7 @@ app.use('/',questRoute)
 
 
 app.use(express.static('public/css/'));
+app.use(express.static('./storage'))
 app.listen(PORT,()=>{
     console.log("Server Started at port"+" $"+PORT)
 })

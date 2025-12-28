@@ -1,4 +1,4 @@
-const { questions } = require("../model")
+const { questions, users } = require("../model")
 
 exports.renderAskquestionPage = (req,res)=>{
     res.render("questions/askQuestion")
@@ -31,4 +31,23 @@ exports.getAllquestion = async(req,res)=>{
             }
         ]
     })
+}
+
+exports.renderSingleQuestionPage = async(req,res)=>{
+    const {id} = req.params
+ 
+        const data = await questions.findAll(
+            {
+                where : {
+                    id:id
+                },
+                include : [{
+                    model:users
+                }]
+            }
+        )
+         
+
+   res.render("./questions/singleQuestion",{data})
+
 }
