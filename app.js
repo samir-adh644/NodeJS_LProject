@@ -8,6 +8,7 @@ const authRoute = require('./routes/authRoutes');
 const questRoute = require('./routes/questionRoutes')
 const jwt = require('jsonwebtoken')
 const {promisify} = require("util")
+const answerRoute = require('./routes/answerRoutes')
 
 require("./model/index")
 
@@ -43,6 +44,8 @@ app.get('/',renderHomePage )
 app.use('/',authRoute)
 
 app.use('/',questRoute)
+
+app.use('/answer',answerRoute)
 
 
 

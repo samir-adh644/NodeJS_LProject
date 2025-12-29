@@ -1,4 +1,7 @@
-// const router = require('express').Router()
-// router.route("/:id").get(renderSingleAnswerPage)
+const { handleAnswer } = require('../controller/answerController')
+const { isAuthenticated } = require('../middleware/isAuthenticated')
 
-// module.exports = router
+const router = require('express').Router()
+router.route("/:id").post(isAuthenticated,handleAnswer)
+
+module.exports = router

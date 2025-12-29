@@ -78,3 +78,7 @@ exports.handleLoginPage = async(req,res)=>{
    
   
 }
+
+exports.renderForgotPasswordPage=(req,res)=>{
+    res.render("./auth/forgotPassword")
+}
