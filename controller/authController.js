@@ -100,12 +100,79 @@ exports.handleForgotPassword=async(req,res)=>{
         subject:"Your reset password OTP",
         text:`Your OTP is ${otp}`
     })
-    data[0].OTP = otp
+    data[0].otp = otp
+    data[0].otpGeneratedTime = Date.now()
     await data[0].save()
 
-    res.redirect("/verifyOTP")
+    res.redirect("/verifyOtp?email="+email)
 }
 
 exports.renderVerifyOTPPage = (req,res)=>{
-    res.render('./auth/verifyOTP')
+    const email = req.query.email
+    res.render('./auth/verifyOtp',{
+        email:email
+    })
 }
+
+exports.verifyOtp =async (req,res)=>{
+    const {otp} = req.body
+    const email = req.params.id
+    const data = await users.findAll({
+        where:{
+            Otp:otp,
+            email:email
+        }
+    })
+    if(data.length === 0){ return res.send("Invalid Otp")}
+
+    const currentTime = Date.now()
+    const otpGeneratedTime=data[0].otpGeneratedTime
+   
+   
+    if(currentTime-otpGeneratedTime <= 25000){
+        res.redirect(`/resetPassword?email=${email}&otp=${otp}`)
+    }
+    else{
+        res.send("Otp Expired")
+    }
+}
+
+exports.renderResetPassword = async (req,res)=>{
+    const {email,otp}  = req.query
+    if (!email || !otp){
+        return res.send("Please provide correct OTP and email")
+    }
+    res.render("./auth/resetPassword",{email,otp})
+}
+
+exports.handleResetPassword = async(req,res)=>{
+    const {email,otp}=req.params
+    const{newPassword,confirmPassword}=req.body
+    if(!email|| !otp || !newPassword || !confirmPassword){return res.send("Please provide otp, email , newPassword and confirmPassword")}
+
+    if(newPassword!==confirmPassword){
+        return res.send("New password must match confirm password")
+    }
+
+    const userData = await users.findAll({
+        where:{
+            email:email,
+            otp:otp
+        }
+    })
+    const currentTime = Date.now()
+    const otpGeneratedTime =userData[0].otpGeneratedTime
+    if(currentTime-otpGeneratedTime <= 55000){
+        await users.update({
+            password:bcrypt.hashSync(newPassword,10)
+        },{
+            where:{
+                email:email
+            }
+        })
+        res.redirect("/login")
+    }
+    else{
+        res.send("Otp Expired")
+    }
+    }

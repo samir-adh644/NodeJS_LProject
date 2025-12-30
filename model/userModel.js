@@ -13,9 +13,12 @@ const makeUserTable = (sequelize,DataTypes)=>{
              type : DataTypes.STRING, 
              allowNull : false
          }, 
-         OTP : {
+         otp : {
             type : DataTypes.INTEGER
          },
+         otpGeneratedTime : {
+            type: DataTypes.STRING
+         }
 
      })
      return User
