@@ -9,6 +9,8 @@ const questRoute = require('./routes/questionRoutes')
 const jwt = require('jsonwebtoken')
 const {promisify} = require("util")
 const answerRoute = require('./routes/answerRoutes')
+const session = require("express-session");
+const flash = require("connect-flash");
 
 require("./model/index")
 
@@ -16,6 +18,18 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
+
+// using session start
+app.use(session({
+    secret: "thisissecretforsession",
+    resave: false,
+    saveUninitialized:false
+}))
+// using session end
+
+// using flash start
+app.use(flash());
+// using flash end
 
 app.use(async(req,res,next)=>{
     const token = req.cookies.jwtToken

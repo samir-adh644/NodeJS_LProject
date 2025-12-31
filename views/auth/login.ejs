@@ -11,14 +11,14 @@
 
    <%- include('../components/navbar') %>
 
+    <p style="color:green"><%- success %></p>
     <div class="main-content">
         <div class="form-container">
             <h2>Log In</h2>
-            
+            <p style="color:red"><%- error %></p>
+
             <form action="/login" method="POST">
                 
-                
-
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>

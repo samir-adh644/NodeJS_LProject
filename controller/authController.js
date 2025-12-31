@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const sendEmail = require("../utils/sendEmail")
 
 exports.renderHomePage = async(req,res)=>{
+    const [successData]= req.flash('success')
     const data = await questions.findAll(
         {
             include : [{
@@ -11,7 +12,7 @@ exports.renderHomePage = async(req,res)=>{
             }]
         }
     )
-    res.render('components/home',{data})
+    res.render('components/home',{data,success:successData})
 }
 
 exports.renderRegisterPage = (req,res)=>{
@@ -42,7 +43,9 @@ exports.handleRegisterPage = async(req,res)=>{
 }
 
 exports.renderLoginPage = (req,res)=>{
-     res.render("auth/login")
+    const [errorData]= req.flash('error')
+    const [successData] = req.flash('success_out')
+     res.render("auth/login",{error:errorData,success:successData})
 }
 
 exports.handleLoginPage = async(req,res)=>{
@@ -65,15 +68,18 @@ exports.handleLoginPage = async(req,res)=>{
              }        )
 
              res.cookie('jwtToken',token)
-          
+            
+             req.flash('success',"Logged In Successfully")
              res.redirect('/')
         }
         else{
-             return res.send("Email or password incorrect")
+             req.flash('error','Email or password incorrect')
+             res.redirect("/login")
         }
     }
     else{
-        return res.send("Email or password incorrect")
+        req.flash('error','Email or password incorrect')
+        res.redirect("/login")
     }
 
    
@@ -175,4 +181,10 @@ exports.handleResetPassword = async(req,res)=>{
     else{
         res.send("Otp Expired")
     }
+    }
+
+    exports.handleLogOut=(req,res)=>{
+        res.clearCookie('jwtToken')
+        req.flash("success_out","Logged Out Successfully")
+        res.redirect('/login')
     }
