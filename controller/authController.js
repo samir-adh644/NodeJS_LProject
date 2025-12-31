@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken')
 const sendEmail = require("../utils/sendEmail")
 
 exports.renderHomePage = async(req,res)=>{
-    const [successData]= req.flash('success')
+
+     const [successData]= req.flash('success')
     const data = await questions.findAll(
         {
             include : [{
@@ -13,7 +14,10 @@ exports.renderHomePage = async(req,res)=>{
         }
     )
     res.render('components/home',{data,success:successData})
-}
+   }
+
+
+
 
 exports.renderRegisterPage = (req,res)=>{
     res.render("auth/register")

@@ -11,7 +11,7 @@ const {promisify} = require("util")
 const answerRoute = require('./routes/answerRoutes')
 const session = require("express-session");
 const flash = require("connect-flash");
-
+const catchError = require('./utils/catchError')
 require("./model/index")
 
 app.set('view engine','ejs')
@@ -53,7 +53,7 @@ app.use(async(req,res,next)=>{
 
 
 
-app.get('/',renderHomePage )
+app.get('/',catchError(renderHomePage) )
 
 app.use('/',authRoute)
 
